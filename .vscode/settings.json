@@ -1,0 +1,12 @@
+{
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "css.validate": false,
+  "tailwindCSS.experimental.classRegex": [],
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}
