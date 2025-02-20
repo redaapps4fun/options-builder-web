@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Steps to run the project:
+
+1. npm install
+2. npm run dev
+3. npm install prisma --save-dev
+4. npx prisma init
+5. npx prisma migrate dev --name init
+6. npm install bcrypt
+7. npm install zod
+8. npm install -g pnpm
+9. npx shadcn@latest init -d
+10. npm install @auth/prisma-adapter
+11. npm run dev
+

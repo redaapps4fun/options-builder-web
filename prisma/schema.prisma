@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PositionType {
+  PUT
+  CALL
+  FUTURE
+}
+
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+  username  String @unique
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  strategies Strategy[]
+}
+
+model Strategy {
+  id          String             @id @default(cuid())
+  userId      String             // Foreign key to User
+  user        User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+  positions   StrategyPosition[] // Relation to positions
+
+  @@unique([userId, name]) // Composite unique constraint
+}
+
+model StrategyPosition {
+  id          String    @id @default(cuid())
+  strategyId  String    // Foreign key to Strategy
+  strategy    Strategy  @relation(fields: [strategyId], references: [id], onDelete: Cascade)
+  positionType PositionType
+  variables   Json      // JSONB field for position-specific variables
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("strategy_positions") // Optional: keeps table name snake_case
+}
